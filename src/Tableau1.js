@@ -15,9 +15,13 @@ class Tableau1 extends Phaser.Scene{
         this.load.image('bg1-terrain-3', 'assets/level/background-1/bg-terrain-3.png');
 
         //ground (premier plan noir)
+        this.load.image('g-stone-2', 'assets/level/ground/g-stone-2.png');
+        this.load.image('g-water', 'assets/level/ground/g-water.png');
+        this.load.image('g-mushroom1', 'assets/level/ground/g-mushroom1.png');
         this.load.image('gMid', 'assets/level/ground/g-mid.png');
         this.load.image('gRight', 'assets/level/ground/g-right.png');
         this.load.image('gTree2', 'assets/level/ground/g-tree-2.png');
+        this.load.image('g-wooden-bridge', 'assets/level/ground/g-wooden-bridge.png');
 
         //au lieu d'écrire 5 lignes quasi identiques, on charge l'herbe avec une boucle
         // ALGO : ceci est une boucle
@@ -93,43 +97,70 @@ class Tableau1 extends Phaser.Scene{
          * @type {Phaser.GameObjects.Container}
          */
         this.groundContainer=this.add.container(0,0);
+
+        let rock1=this.add.image(420,340, 'g-stone-2').setOrigin(0,1);
+        this.groundContainer.add(rock1); // le caillou à côté du pont à gauche
+
+        let water1=this.add.image(480,600, 'g-water').setOrigin(0,1);
+        this.groundContainer.add(water1); // L'eau
+
+        let mush1=this.add.image(190,335, 'g-mushroom1').setOrigin(0,1);
+        this.groundContainer.add(mush1);
+        mush1.flipX=true; // Le champi
+        // herbe un peu longue
+        let grass3=this.add.image(155,340,'g-grass-3').setOrigin(0,1)
+        this.groundContainer.add(grass3);
+        // herbe encore plus longue et grande
+        let grass4=this.add.image(230,345,'g-grass-5').setOrigin(0,1)
+        this.groundContainer.add(grass4);
+
+        let bridge=this.add.image(460,385,'g-wooden-bridge').setOrigin(0,1)
+        this.groundContainer.add(bridge);
+
+
+
         /**
          * Arbre
          * @type {Phaser.GameObjects.Image}
          */
-        let tree1=this.add.image(300,400, 'gTree2').setOrigin(0,1);
-        tree1.setTintFill(0xFF0000); // pratique pour dbugger
+        let tree1=this.add.image(300,335, 'gTree2').setOrigin(0,1);
         this.groundContainer.add(tree1);
+        tree1.setScale(0.8)
+
+        let tree2=this.add.image(50,335, 'gTree2').setOrigin(0,1);
+        this.groundContainer.add(tree2); // deuxième arbre foreground de gauche
+        tree2.angle=-1;
+        tree2.flipX=true;
         /**
          * Terrain 1
          * @type {Phaser.GameObjects.Image}
          */
         //ici on va calculer les positions
-        let gMid1=this.add.image(0,400, 'gMid').setOrigin(0,0);
+        let gMid1=this.add.image(0,325, 'gMid').setOrigin(0,0);
         this.groundContainer.add(gMid1);
         /**
          * Terrain 2
          * @type {Phaser.GameObjects.Image}
          */
-        let gMid2=this.add.image(gMid1.x+gMid1.width+1,400, 'gMid').setOrigin(0,0); //on rajoute 1 px pour l'exemple
+        let gMid2=this.add.image(gMid1.x+gMid1.width,325, 'gMid').setOrigin(0,0); //on rajoute 1 px pour l'exemple
         this.groundContainer.add(gMid2);
         /**
          * Terrain 3
          * @type {Phaser.GameObjects.Image}
          */
-        let gMid3=this.add.image(gMid2.x+gMid2.width,400, 'gRight').setOrigin(0,0);
+        let gMid3=this.add.image(300,325, 'gRight').setOrigin(0,0);
         this.groundContainer.add(gMid3);
         /**
          * De l'herbe en textures qui se répète
          * @type {Phaser.GameObjects.TileSprite}
          */
-        let grass=this.add.tileSprite(0,420,gMid3.x+gMid3.width-40,50,'g-grass-1').setOrigin(0,1)
+        let grass=this.add.tileSprite(0,350,gMid3.x+gMid3.width-40,50,'g-grass-1').setOrigin(0,1)
         this.groundContainer.add(grass);
         /**
          * encore de l'herbe
          * @type {Phaser.GameObjects.TileSprite}
          */
-        let grass2=this.add.tileSprite(0,420,gMid3.x+gMid3.width-40,50,'g-grass-3').setOrigin(0,1)
+        let grass2=this.add.tileSprite(0,350,gMid3.x+gMid3.width-40,50,'g-grass-3').setOrigin(0,1)
         this.groundContainer.add(grass2);
         /**
          * filtre type film au premier plan
