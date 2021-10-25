@@ -54,6 +54,21 @@ class Tableau1 extends Phaser.Scene{
          */
         let bgAnimationA=this.add.sprite(0,0, 'bg-animation-1').setOrigin(0,0);
 
+        this.bgAnimationA = this.add.sprite(0, 0, 'bg-animation-1').setOrigin(0,0);
+        //animation de 3 images
+        this.anims.create({
+            key: 'film2',
+            frames: [
+                {key:'bg-animation-1'},
+                {key:'bg-animation-2'},
+                {key:'bg-animation-3'}
+            ],
+            frameRate: 16,
+            repeat: -1
+        });
+        this.bgAnimationA.play('film2');
+
+
         //--------------background 2 (tout au fond et flou)--------------------
 
         /**
@@ -180,19 +195,9 @@ class Tableau1 extends Phaser.Scene{
         });
         this.filterFilm.play('film');
 
+
         //TODO élève faire une animation du même genre que filter mais pour bgAnimationA
 
-        this.anims.create({
-            key: 'film2',
-            frames: [
-                {key:'bg-animation-1'},
-                {key:'bg-animation-2'},
-                {key:'bg-animation-3'},
-            ],
-            frameRate: 16,
-            repeat: -1
-        });
-        this.bgAnimationA.play('film2');
 
         //gestion du parallaxe
         /**
