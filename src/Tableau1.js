@@ -212,9 +212,12 @@ class Tableau1 extends Phaser.Scene{
         //définit à quelles vitesse se déplacent nos différents plans
         bgAnimationA.scrollFactorX=0;
         this.filterFilm.scrollFactorX=0;
+        //this.bg2Container.scrollFactorX=0.2;
+        //this.bg1Container.scrollFactorX=0.4;
+        //this.groundContainer.scrollFactorX=1;
         this.bg2Container.scrollFactorX=0.2;
         this.bg1Container.scrollFactorX=0.4;
-        this.groundContainer.scrollFactorX=1;
+        this.groundContainer.scrollFactorX=10;
     }
     /**
      * Définit ce qui se passe quand on appuie ou relache une touche du clavier
