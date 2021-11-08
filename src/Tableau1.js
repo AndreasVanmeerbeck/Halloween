@@ -18,6 +18,7 @@ class Tableau1 extends Phaser.Scene{
         this.load.image('bg1-terrain-1', 'assets/level/background-1/bg-terrain-1.png');
         this.load.image('bg1-tree-3', 'assets/level/background-1/bg-tree-3.png');
         this.load.image('bg1-tree-1', 'assets/level/background-1/bg-tree-1.png');
+        this.load.image('bg1-tree-2', 'assets/level/background-1/bg-tree-2.png');
 
         //ground (premier plan noir)
         this.load.image('g-stone-2', 'assets/level/ground/g-stone-2.png');
@@ -38,6 +39,7 @@ class Tableau1 extends Phaser.Scene{
         this.load.image('g-fellen-tree-1', 'assets/level/ground/g-fellen-tree-1.png');
         this.load.image('z12', 'assets/level/ground/z12.png');
         this.load.image('z4', 'assets/level/ground/z4.png');
+        this.load.image('z6', 'assets/level/ground/z6.png');
 
         //au lieu d'écrire 5 lignes quasi identiques, on charge l'herbe avec une boucle
         // ALGO : ceci est une boucle
@@ -111,6 +113,10 @@ class Tableau1 extends Phaser.Scene{
         let bg2Terrain1=this.add.image(780,200, 'bg2-terrain-1').setOrigin(0,0);
         this.bg2Container.add(bg2Terrain1);
         bg2Terrain1.scale=0.5;
+
+        let bg2Terrain1bis=this.add.image(1150,200, 'bg2-terrain-1').setOrigin(0,0);
+        this.bg2Container.add(bg2Terrain1bis);
+        bg2Terrain1bis.scale=0.7;
         /**
          * Arbre dans bg2
          * @type {Phaser.GameObjects.Image}
@@ -118,6 +124,10 @@ class Tableau1 extends Phaser.Scene{
         let bg2Tree1=this.add.image(500,-50, 'bg2-tree-2').setOrigin(0,0);
         this.bg2Container.add(bg2Tree1);
         bg2Tree1.scale=0.5;
+
+        let bg2Tree1bis=this.add.image(1350,0, 'bg2-tree-2').setOrigin(0,0);
+        this.bg2Container.add(bg2Tree1bis);
+        bg2Tree1bis.scale=0.5;
 
         let bg2Tree3=this.add.image(780,-30, 'bg2-tree-3').setOrigin(0,0);
         this.bg2Container.add(bg2Tree3);
@@ -157,6 +167,26 @@ class Tableau1 extends Phaser.Scene{
         let bg1tree2=this.add.image(10,-25, 'bg1-tree-1').setOrigin(0,0);
         this.bg1Container.add(bg1tree2);
         bg1tree2.scale=0.5;
+
+        let bg1Terrain1bis=this.add.image(950,275, 'bg1-terrain-1').setOrigin(0,0);
+        this.bg1Container.add(bg1Terrain1bis);
+        bg1Terrain1bis.scale=0.5;
+
+        let bg1Terrain1tis=this.add.image(1450,300, 'bg1-terrain-1').setOrigin(0,0);
+        this.bg1Container.add(bg1Terrain1tis);
+        bg1Terrain1tis.scale=0.6;
+
+        let bg1tree3bis=this.add.image(1050,0, 'bg1-tree-3').setOrigin(0,0);
+        this.bg1Container.add(bg1tree3bis);
+        bg1tree3bis.scale=0.7;
+
+        let bg1tree2bis=this.add.image(1700,-25, 'bg1-tree-2').setOrigin(0,0);
+        this.bg1Container.add(bg1tree2bis);
+        bg1tree2bis.scale=0.7;
+
+        let bg1tree2tis=this.add.image(1550,-50, 'bg1-tree-2').setOrigin(0,0);
+        this.bg1Container.add(bg1tree2tis);
+        bg1tree2tis.scale=0.7;
 
 
         //-------------ground (premier plan noir)---------------------------
@@ -272,6 +302,11 @@ class Tableau1 extends Phaser.Scene{
         this.groundContainer.add(z4);
         z4.scale=0.8
 
+        let z6=this.add.image(580,260,'z6').setOrigin(0,1)
+        this.groundContainer.add(z6);
+        z6.scale=0.36
+        z6.angle=6
+
 
 
 
@@ -349,7 +384,7 @@ class Tableau1 extends Phaser.Scene{
             frameRate: 16,
             repeat: -1
         });
-        this.filterFilm.play('blood');
+        this.filterBloody.play('blood');
 
         this.filterRain = this.add.sprite(0, 0, 'filterRain-1').setOrigin(0,0);
         //animation de 3 images
@@ -363,7 +398,7 @@ class Tableau1 extends Phaser.Scene{
             frameRate: 16,
             repeat: -1
         });
-        this.filterFilm.play('rain');
+        this.filterRain.play('rain');
 
         //TODO élève faire une animation du même genre que filter mais pour bgAnimationA
 
@@ -377,16 +412,18 @@ class Tableau1 extends Phaser.Scene{
         //initialise ce qui se passe avec le clavier
         this.initKeyboard();
         // Définit l'espace de déplacement de la caméra
-        this.cameras.main.setBounds(0, 0, 2000, 540);
+        this.cameras.main.setBounds(0, 0, 1550, 540);
         //définit à quelles vitesse se déplacent nos différents plans
         bgAnimationA.scrollFactorX=0;
         this.filterFilm.scrollFactorX=0;
+        this.filterBloody.scrollFactorX=0;
+        this.filterRain.scrollFactorX=0;
         //this.bg2Container.scrollFactorX=0.2;
         //this.bg1Container.scrollFactorX=0.4;
         //this.groundContainer.scrollFactorX=1;
-        this.bg2Container.scrollFactorX=0.2;
-        this.bg1Container.scrollFactorX=0.4;
-        this.groundContainer.scrollFactorX=10;
+        this.bg2Container.scrollFactorX=1.2;
+        this.bg1Container.scrollFactorX=1.5;
+        this.groundContainer.scrollFactorX=2;
     }
     /**
      * Définit ce qui se passe quand on appuie ou relache une touche du clavier
