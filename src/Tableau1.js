@@ -43,6 +43,14 @@ class Tableau1 extends Phaser.Scene{
 
         //au lieu d'écrire 5 lignes quasi identiques, on charge l'herbe avec une boucle
         // ALGO : ceci est une boucle
+        for(let i=1;i<=10;i++){
+            this.load.image('enemy-'+i, 'assets/Characters/enemy1/PNG/idle/enemy-'+i+'.png');
+        }
+
+        for(let i=1;i<=10;i++){
+            this.load.image('Layer-'+i, 'assets/Characters/boy/boy_style_1/PNG/idle/Layer-'+i+'.png');
+        }
+
         for(let i=1;i<=5;i++){
             this.load.image('g-grass-'+i, 'assets/level/ground/g-grass-'+i+'.png');
         }
@@ -73,6 +81,7 @@ class Tableau1 extends Phaser.Scene{
      * TODO élèves : plus tard, continuez le décor vers la droite en vous servant des assets mis à votre disposition
      */
     create(){
+
 
         /**
          * Fond très clair avec une trame
@@ -309,8 +318,6 @@ class Tableau1 extends Phaser.Scene{
 
 
 
-
-
         /**
          * Arbre
          * @type {Phaser.GameObjects.Image}
@@ -354,6 +361,27 @@ class Tableau1 extends Phaser.Scene{
          */
         let grass2=this.add.tileSprite(0,350,gMid3.x+gMid3.width-40,50,'g-grass-3').setOrigin(0,1)
         this.groundContainer.add(grass2);
+
+        this.idle2 = this.add.sprite(1000, -25, 'enemy-1').setOrigin(0,0);
+        console.log(frames)
+        this.anims.create({
+            key: 'IdleEnemy',
+            frames: this.getFrames("enemy-",10),
+            frameRate: 12,
+            repeat: -1
+        });
+        this.idle2.play('IdleEnemy');
+
+
+        this.idle = this.add.sprite(525, -25, 'Layer-1').setOrigin(0,0);
+        console.log(frames)
+        this.anims.create({
+            key: 'Idle',
+            frames: this.getFrames("Layer-",10),
+            frameRate: 12,
+            repeat: -1
+        });
+        this.idle.play('Idle');
         /**
          * filtre type film au premier plan
          * @type {Phaser.GameObjects.Sprite}
@@ -400,6 +428,8 @@ class Tableau1 extends Phaser.Scene{
         });
         this.filterRain.play('rain');
 
+
+
         //TODO élève faire une animation du même genre que filter mais pour bgAnimationA
 
 
@@ -424,6 +454,20 @@ class Tableau1 extends Phaser.Scene{
         this.bg2Container.scrollFactorX=1.2;
         this.bg1Container.scrollFactorX=1.5;
         this.groundContainer.scrollFactorX=2;
+    }
+    /**
+     * Renvoie un tableau d'images
+     * @param prefix
+     * @param length
+     * @returns {*[]}
+     */
+    getFrames(prefix,length)
+    {
+        let frames = [];
+        for (let i = 1; i <= length; i++) {
+            frames.push({key: prefix + i});
+        }
+        return frames;
     }
     /**
      * Définit ce qui se passe quand on appuie ou relache une touche du clavier
