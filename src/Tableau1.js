@@ -44,6 +44,13 @@ class Tableau1 extends Phaser.Scene{
         //au lieu d'écrire 5 lignes quasi identiques, on charge l'herbe avec une boucle
         // ALGO : ceci est une boucle
         for(let i=1;i<=10;i++){
+            this.load.image('boy2-'+i, 'assets/Characters/boy/boy_style_4/PNG/idle/boy'+i+'.png');
+        }
+
+        for(let i=1;i<=6;i++){
+            this.load.image('enemy2-'+i, 'assets/Characters/enemy2/PNG/idle/fly'+i+'.png');
+        }
+        for(let i=1;i<=10;i++){
             this.load.image('enemy-'+i, 'assets/Characters/enemy1/PNG/idle/enemy-'+i+'.png');
         }
 
@@ -199,7 +206,26 @@ class Tableau1 extends Phaser.Scene{
 
 
         //-------------ground (premier plan noir)---------------------------
+        this.idle2 = this.add.sprite(130, -80, 'enemy-1').setOrigin(0,0);
+        console.log(frames)
+        this.anims.create({
+            key: 'IdleEnemy',
+            frames: this.getFrames("enemy-",10),
+            frameRate: 12,
+            repeat: -1
+        });
+        this.idle2.play('IdleEnemy');
 
+        this.idle3 = this.add.sprite(1200, -80, 'fly').setOrigin(0,0);
+        console.log(frames)
+        this.anims.create({
+            key: 'IdleEnemy2',
+            frames: this.getFrames("enemy2-",6),
+            frameRate: 12,
+            repeat: -1,
+
+        });
+        this.idle3.play('IdleEnemy2');
         /**
          * contient tous les éléments du premier plan (noir)
          * @type {Phaser.GameObjects.Container}
@@ -362,16 +388,15 @@ class Tableau1 extends Phaser.Scene{
         let grass2=this.add.tileSprite(0,350,gMid3.x+gMid3.width-40,50,'g-grass-3').setOrigin(0,1)
         this.groundContainer.add(grass2);
 
-        this.idle2 = this.add.sprite(1000, -25, 'enemy-1').setOrigin(0,0);
+        this.idle4 = this.add.sprite(1200, 0, 'boy').setOrigin(0,0);
         console.log(frames)
         this.anims.create({
-            key: 'IdleEnemy',
-            frames: this.getFrames("enemy-",10),
+            key: 'Idle2',
+            frames: this.getFrames("boy2-",10),
             frameRate: 12,
             repeat: -1
         });
-        this.idle2.play('IdleEnemy');
-
+        this.idle4.play('Idle2');
 
         this.idle = this.add.sprite(525, -25, 'Layer-1').setOrigin(0,0);
         console.log(frames)
@@ -445,14 +470,18 @@ class Tableau1 extends Phaser.Scene{
         this.cameras.main.setBounds(0, 0, 1550, 540);
         //définit à quelles vitesse se déplacent nos différents plans
         bgAnimationA.scrollFactorX=0;
+        this.idle4.scrollFactorX=2;
+        this.idle3.scrollFactorX=2;
+        this.idle2.scrollFactorX=2;
+        this.idle.scrollFactorX=2;
         this.filterFilm.scrollFactorX=0;
         this.filterBloody.scrollFactorX=0;
         this.filterRain.scrollFactorX=0;
         //this.bg2Container.scrollFactorX=0.2;
         //this.bg1Container.scrollFactorX=0.4;
         //this.groundContainer.scrollFactorX=1;
-        this.bg2Container.scrollFactorX=1.2;
-        this.bg1Container.scrollFactorX=1.5;
+        this.bg2Container.scrollFactorX=0.5;
+        this.bg1Container.scrollFactorX=1;
         this.groundContainer.scrollFactorX=2;
     }
     /**
@@ -480,10 +509,10 @@ class Tableau1 extends Phaser.Scene{
             switch (kevent.keyCode)
             {
                 case Phaser.Input.Keyboard.KeyCodes.RIGHT:
-                    me.speed=1;
+                    me.speed=5;
                     break;
                 case Phaser.Input.Keyboard.KeyCodes.LEFT:
-                    me.speed=-1;
+                    me.speed=-5;
                     break;
             }
         });
